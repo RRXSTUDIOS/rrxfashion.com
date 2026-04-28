@@ -2,257 +2,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RRX FASHION | Premium Clothing Store</title>
+    <title>RRX FASHION | Official Store</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #ffffff;
-            --brand-black: #0f0f0f;
-            --gold-accent: #c5a059; /* প্রিমিয়াম লুকের জন্য গোল্ডেন টাচ */
-            --light-gray: #f4f4f4;
+            --text-color: #111111;
+            --accent: #c5a059;
+            --card-bg: #f9f9f9;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Dark Mode Colors */
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --card-bg: #151515;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
-            color: var(--brand-black);
+            color: var(--text-color);
+            transition: var(--transition);
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Header & Theme Toggle */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #eee;
+            background: var(--bg-color);
+            border-bottom: 1px solid rgba(128,128,128,0.1);
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            letter-spacing: 5px;
+            font-size: 1.4rem;
+            letter-spacing: 4px;
             font-weight: bold;
-            color: var(--brand-black);
-            text-transform: uppercase;
         }
 
-        .logo span {
-            color: var(--gold-accent);
-        }
-
-        nav ul {
+        .nav-right {
             display: flex;
-            list-style: none;
+            align-items: center;
+            gap: 25px;
         }
 
-        nav ul li { margin-left: 30px; }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--brand-black);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            transition: 0.3s;
+        .theme-toggle {
+            cursor: pointer;
+            background: none;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
         }
 
-        nav ul li a:hover { color: var(--gold-accent); }
+        .theme-toggle:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
 
-        /* Hero */
+        /* Hero Section with Slide Effect */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=2070') center/cover;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
             color: white;
         }
 
-        .hero h1 {
+        .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            animation: fadeInUp 1s ease-out;
         }
 
-        .hero p {
-            letter-spacing: 4px;
-            font-weight: 300;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
+        /* Buttons with Animation */
         .btn {
-            padding: 15px 45px;
-            border: 1px solid white;
-            background: transparent;
+            position: relative;
+            padding: 15px 40px;
             color: white;
             text-decoration: none;
             font-size: 0.8rem;
             letter-spacing: 2px;
-            transition: 0.4s;
+            border: 1px solid white;
+            overflow: hidden;
+            display: inline-block;
+            margin-top: 20px;
+            transition: var(--transition);
         }
 
-        .btn:hover {
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: white;
-            color: black;
+            transition: var(--transition);
+            z-index: -1;
         }
 
-        /* Products Section */
-        .products {
-            padding: 100px 8%;
-        }
+        .btn:hover::before { left: 0; }
+        .btn:hover { color: black; transform: translateY(-3px); }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
+        /* Product Grid Section */
+        .section { padding: 100px 8%; }
+        .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            letter-spacing: 3px;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            text-align: center;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .card {
+            background: var(--card-bg);
+            transition: var(--transition);
             position: relative;
-            cursor: pointer;
+            border-radius: 4px;
             overflow: hidden;
         }
 
+        .card:hover { transform: translateY(-10px); }
+
         .card-img {
-            height: 500px;
-            background-color: var(--light-gray);
+            height: 400px;
             background-size: cover;
             background-position: center;
-            transition: transform 0.5s;
+            transition: transform 0.8s ease;
         }
 
-        .card:hover .card-img {
-            transform: scale(1.05);
-        }
+        .card:hover .card-img { transform: scale(1.1); }
 
         .card-info {
-            padding-top: 20px;
+            padding: 20px;
             text-align: center;
         }
 
-        .card-info h3 {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
+        .price { color: var(--accent); font-weight: bold; margin-top: 5px; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .price {
-            color: var(--gold-accent);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            padding: 80px 8%;
-            background: #111;
-            color: white;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-        }
-
-        .copyright {
-            font-size: 0.7rem;
-            color: #555;
-            margin-top: 40px;
-            letter-spacing: 1px;
-        }
-
+        /* Responsive Mobile */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav ul { display: none; }
+            nav { padding: 15px 5%; }
+            .grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .card-img { height: 250px; }
+            .hero-content h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">RRX<span>.</span>FASHION</div>
-        <ul>
-            <li><a href="#">COLLECTIONS</a></li>
-            <li><a href="#">MEN</a></li>
-            <li><a href="#">WOMEN</a></li>
-            <li><a href="#">CONTACT</a></li>
-        </ul>
+        <div class="logo">RRX.FASHION</div>
+        <div class="nav-right">
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">SUNLIGHT</button>
+        </div>
     </nav>
 
     <header class="hero">
-        <p>Redefining Elegance</p>
-        <h1>RRX FASHION</h1>
-        <a href="#shop" class="btn">VIEW COLLECTION</a>
+        <div class="hero-content">
+            <h1>RRX PREMIUM</h1>
+            <p style="letter-spacing: 5px;">ESTABLISHED 2026</p>
+            <a href="#men" class="btn">EXPLORE</a>
+        </div>
     </header>
 
-    <section class="products" id="shop">
-        <div class="section-header">
-            <h2>NEW ARRIVALS</h2>
-        </div>
+    <section class="section" id="men">
+        <h2 class="section-title">Men's Collection</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&q=80&w=400x500');"></div>
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Midnight Premium Tee</h3>
-                    <p class="price">৳ 1,490</p>
+                    <h3>Premium Suit</h3>
+                    <p class="price">৳ 8,500</p>
                 </div>
             </div>
             <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&q=80&w=400x500');"></div>
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550246140-5119ae4790b8?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Aesthetic Leather Biker</h3>
-                    <p class="price">৳ 4,200</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=400x500');"></div>
-                <div class="card-info">
-                    <h3>Minimalist White Sweatshirt</h3>
-                    <p class="price">৳ 2,150</p>
+                    <h3>Midnight Tee</h3>
+                    <p class="price">৳ 1,200</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-logo">RRX FASHION</div>
-        <p style="font-size: 0.8rem; letter-spacing: 2px;">Premium Quality | Timeless Design</p>
-        <p class="copyright">© 2026 RRXFASHION.COM | ALL RIGHTS RESERVED.</p>
+    <section class="section" id="women" style="background: var(--card-bg);">
+        <h2 class="section-title">Women's Luxury</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=400');"></div>
+                <div class="card-info">
+                    <h3>Silk Evening Dress</h3>
+                    <p class="price">৳ 5,800</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&q=80&w=400');"></div>
+                <div class="card-info">
+                    <h3>Woolen Overcoat</h3>
+                    <p class="price">৳ 7,500</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 50px; text-align: center; border-top: 1px solid rgba(128,128,128,0.1);">
+        <p>© 2026 RRXFASHION.COM</p>
     </footer>
 
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                btn.innerText = "SUNLIGHT";
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerText = "DARKNESS";
+            }
+        }
+    </script>
 </body>
 </html>

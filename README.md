@@ -28,6 +28,7 @@
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+            text-decoration: none !important; /* নীল লিঙ্ক কালার রিমুভ করার জন্য */
         }
 
         body {
@@ -57,25 +58,29 @@
             font-size: 1.2rem;
             letter-spacing: 3px;
             font-weight: bold;
+            color: var(--text-color);
         }
 
-        /* Sunlight Button Fixed inside screen */
+        /* Sunlight Button Fixed & Polished */
         .theme-toggle {
             cursor: pointer;
-            background: none;
+            background: transparent;
             border: 1px solid var(--text-color);
             color: var(--text-color);
-            padding: 6px 15px;
+            padding: 8px 18px;
             border-radius: 25px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
+            font-weight: 500;
             transition: var(--transition);
+            outline: none;
         }
 
         .theme-toggle:hover {
             background: var(--text-color);
             color: var(--bg-color);
+            box-shadow: var(--glow);
         }
 
         /* Hero Section */
@@ -85,11 +90,12 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=2070');
             background-size: cover;
             background-position: center;
             color: white;
+            margin-top: 0; /* গ্যাপ রিমুভ করার জন্য */
         }
 
         .hero-content h1 {
@@ -97,20 +103,19 @@
             font-size: clamp(2.5rem, 7vw, 5rem);
             animation: fadeInUp 1.2s ease-out;
             letter-spacing: 5px;
+            color: white;
         }
 
         .btn {
             position: relative;
             padding: 12px 35px;
             color: white;
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
             border: 1px solid white;
             display: inline-block;
             margin-top: 25px;
             transition: var(--transition);
             z-index: 1;
+            background: transparent;
         }
 
         .btn:hover { color: black; background: white; transform: scale(1.05); }
@@ -172,7 +177,7 @@
             text-shadow: var(--glow);
             font-weight: 500;
             margin-top: 10px;
-            transition: var(--transition);
+            display: block; /* প্রপার গ্লো এর জন্য */
         }
 
         @keyframes fadeInUp {
@@ -180,7 +185,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr 1fr; }
             .hero-content h1 { font-size: 2.2rem; }

@@ -12,14 +12,15 @@
             --text-color: #111111;
             --accent: #c5a059;
             --card-bg: #f9f9f9;
+            --glow: 0 0 10px rgba(197, 160, 89, 0.5);
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* Dark Mode Colors */
         [data-theme="dark"] {
             --bg-color: #0a0a0a;
             --text-color: #ffffff;
             --card-bg: #151515;
+            --glow: 0 0 20px rgba(197, 160, 89, 0.8);
         }
 
         * {
@@ -37,12 +38,12 @@
             overflow-x: hidden;
         }
 
-        /* Header & Theme Toggle */
+        /* Fixed Navigation */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
+            padding: 15px 5%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -53,26 +54,22 @@
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            letter-spacing: 4px;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
             font-weight: bold;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
+        /* Sunlight Button Fixed inside screen */
         .theme-toggle {
             cursor: pointer;
             background: none;
             border: 1px solid var(--text-color);
             color: var(--text-color);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             transition: var(--transition);
         }
 
@@ -81,14 +78,14 @@
             color: var(--bg-color);
         }
 
-        /* Hero Section with Slide Effect */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
                         url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=2070');
             background-size: cover;
             background-position: center;
@@ -97,93 +94,97 @@
 
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            animation: fadeInUp 1s ease-out;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            animation: fadeInUp 1.2s ease-out;
+            letter-spacing: 5px;
         }
 
-        /* Buttons with Animation */
         .btn {
             position: relative;
-            padding: 15px 40px;
+            padding: 12px 35px;
             color: white;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
             border: 1px solid white;
-            overflow: hidden;
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 25px;
             transition: var(--transition);
+            z-index: 1;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: white;
-            transition: var(--transition);
-            z-index: -1;
-        }
+        .btn:hover { color: black; background: white; transform: scale(1.05); }
 
-        .btn:hover::before { left: 0; }
-        .btn:hover { color: black; transform: translateY(-3px); }
-
-        /* Product Grid Section */
-        .section { padding: 100px 8%; }
+        /* Sections */
+        .section { padding: 80px 5%; }
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
             text-align: center;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
         }
 
         .card {
             background: var(--card-bg);
             transition: var(--transition);
-            position: relative;
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
         }
 
-        .card:hover { transform: translateY(-10px); }
-
         .card-img {
-            height: 400px;
+            height: 350px;
             background-size: cover;
             background-position: center;
             transition: transform 0.8s ease;
         }
 
-        .card:hover .card-img { transform: scale(1.1); }
+        .card:hover .card-img { transform: scale(1.08); }
 
-        .card-info {
-            padding: 20px;
+        .card-info { padding: 15px; text-align: center; }
+
+        .price { color: var(--accent); font-weight: bold; }
+
+        /* Footer with GLOW EFFECT */
+        footer {
+            padding: 60px 5%;
             text-align: center;
+            background: var(--bg-color);
+            border-top: 1px solid rgba(128,128,128,0.1);
         }
 
-        .price { color: var(--accent); font-weight: bold; margin-top: 5px; }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
 
-        /* Animations */
+        .copyright-glow {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: var(--glow);
+            font-weight: 500;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Mobile */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            nav { padding: 15px 5%; }
-            .grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .card-img { height: 250px; }
-            .hero-content h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr 1fr; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .card-img { height: 220px; }
         }
     </style>
 </head>
@@ -191,33 +192,31 @@
 
     <nav>
         <div class="logo">RRX.FASHION</div>
-        <div class="nav-right">
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">SUNLIGHT</button>
-        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">SUNLIGHT</button>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
             <h1>RRX PREMIUM</h1>
-            <p style="letter-spacing: 5px;">ESTABLISHED 2026</p>
-            <a href="#men" class="btn">EXPLORE</a>
+            <p style="letter-spacing: 5px; font-weight: 300;">THE NEW STANDARD</p>
+            <a href="#men" class="btn">VIEW DROPS</a>
         </div>
     </header>
 
     <section class="section" id="men">
-        <h2 class="section-title">Men's Collection</h2>
+        <h2 class="section-title">Men's Select</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Premium Suit</h3>
+                    <h3>Signature Suit</h3>
                     <p class="price">৳ 8,500</p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1550246140-5119ae4790b8?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Midnight Tee</h3>
+                    <h3>Essential Tee</h3>
                     <p class="price">৳ 1,200</p>
                 </div>
             </div>
@@ -225,27 +224,28 @@
     </section>
 
     <section class="section" id="women" style="background: var(--card-bg);">
-        <h2 class="section-title">Women's Luxury</h2>
+        <h2 class="section-title">Women's Couture</h2>
         <div class="grid">
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Silk Evening Dress</h3>
+                    <h3>Evening Silk</h3>
                     <p class="price">৳ 5,800</p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&q=80&w=400');"></div>
                 <div class="card-info">
-                    <h3>Woolen Overcoat</h3>
+                    <h3>Wool Overcoat</h3>
                     <p class="price">৳ 7,500</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 50px; text-align: center; border-top: 1px solid rgba(128,128,128,0.1);">
-        <p>© 2026 RRXFASHION.COM</p>
+    <footer>
+        <div class="footer-logo">RRX FASHION</div>
+        <p class="copyright-glow">@2026 COPYRIGHT RRXFASHION BY RRX STUDIOS</p>
     </footer>
 
     <script>
